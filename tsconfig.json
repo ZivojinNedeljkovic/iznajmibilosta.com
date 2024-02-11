@@ -18,6 +18,10 @@
       }
     ],
     "paths": {
+      "@ui/*": ["./src/features/ui/*"],
+      "@navigation/*": ["./src/features/navigation/*"],
+      "@auth/*": ["./src/features/auth/*"],
+      "@features/*": ["./src/features/*"],
       "@/*": ["./src/*"]
     }
   },

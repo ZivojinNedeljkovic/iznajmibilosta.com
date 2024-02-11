@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.wrapper button {
+  background: transparent;
+  display: flex;
+  min-height: 76px;
+  width: 100%;
+  padding-left: 16px;
+  gap: 16px;
+  align-items: center;
+  border-radius: var(--border-radius);
+  border: var(--border);
+  cursor: pointer;
+  // box-shadow: ;
+  box-shadow: var(--box-shadow);
+}
+
+.wrapper svg {
+  height: 44px;
+}
+
+.wrapper span {
+  font-size: 0.875rem;
+}

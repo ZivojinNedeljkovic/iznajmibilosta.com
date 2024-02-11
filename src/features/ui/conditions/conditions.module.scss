@@ -1,0 +1,21 @@
+.wrapper {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wrapper li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9375rem;
+}
+
+.wrapper svg {
+  width: 1.5rem;
+}
+
+.is-true svg path {
+  fill: var(--success);
+}

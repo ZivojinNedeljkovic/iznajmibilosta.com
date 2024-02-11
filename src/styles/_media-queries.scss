@@ -1,0 +1,74 @@
+$xs: 390px;
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1536px;
+
+@mixin xs {
+  @media only screen and (min-width: $xs) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media only screen and (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media only screen and (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media only screen and (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media only screen and (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media only screen and (min-width: $xl) {
+    @content;
+  }
+}
+
+@mixin custom($screenWidth) {
+  @media only screen and (min-width: $screenWidth) {
+    @content;
+  }
+}
+
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @include md {
+    display: none;
+  }
+}
+
+@mixin desktop-only($displayProp: block) {
+  display: none;
+  @include md {
+    display: $displayProp;
+  }
+}
+
+@mixin motion-preference {
+  @media (prefers-reduced-motion) {
+    animation: none;
+    transition: none;
+  }
+}
