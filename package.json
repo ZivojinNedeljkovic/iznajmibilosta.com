@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "firebase emulators:start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +11,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "classnames": "^2.5.1",
+    "firebase": "^10.8.0",
+    "firebase-admin": "^12.0.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
