@@ -13,12 +13,12 @@ function SignUpPage() {
     <main className={styles.wrapper}>
       <Card>
         <H1>Registrujte se</H1>
+        <SignUpForm />
+        <OrDivide />
         <FlexBox direction="column" gap={16}>
           <Providers isSignUp />
           <ProvidersTerms />
         </FlexBox>
-        <OrDivide />
-        <SignUpForm />
       </Card>
     </main>
   )
