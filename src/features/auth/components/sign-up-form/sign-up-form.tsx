@@ -1,18 +1,16 @@
 'use client'
-import FlexBox from '@ui/flex-box'
 import React from 'react'
+import styles from './sign-up-form.module.scss'
+import FlexBox from '@ui/flex-box'
 import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  containsASpecialCharSchema,
-  containsANumberSchema,
-  formSchema,
-  passwordLengthSchema,
-} from './form-schema'
+import { formSchema } from './form-schema'
 import Conditions from '@ui/conditions'
 import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
+import ActionButton from '@ui/button/action-button'
+import getPasswordConditions from './getPasswordConditions'
+// import createUserWithEmailAndPassword from '@/lib/firebase/createUserWithEmailAndPassword'
 
 function SignUpForm() {
   const {
@@ -28,25 +26,21 @@ function SignUpForm() {
 
   const password = watch('password')
 
-  const passwordConditions = [
-    {
-      description: 'Između 8 i 20 karaktera',
-      isTrue: passwordLengthSchema.safeParse(password).success,
-    },
-    {
-      description: 'Najmanje jedan broj',
-      isTrue: containsANumberSchema.safeParse(password).success,
-    },
-    {
-      description: 'Najmanje jedan simbol',
-      isTrue: containsASpecialCharSchema.safeParse(password).success,
-    },
-  ]
+  const passwordConditions = getPasswordConditions(password)
 
   const hasError = Object.entries(errors).length > 0
 
   return (
-    <form onSubmit={handleSubmit(() => {})} noValidate>
+    <form
+      onSubmit={handleSubmit(async ({ email, password }) => {
+        const createUserWithEmailAndPassword = (
+          await import('@/lib/firebase/createUserWithEmailAndPassword')
+        ).default
+        createUserWithEmailAndPassword(email, password)
+      })}
+      noValidate
+      className={styles.form}
+    >
       <FlexBox direction="column" gap={16}>
         <TextFiled
           label="E-mail adresa"
@@ -78,7 +72,7 @@ function SignUpForm() {
           control={control}
         />
       </FlexBox>
-      <button>submit</button>
+      <ActionButton type="submit">Nastavi</ActionButton>
     </form>
   )
 }
