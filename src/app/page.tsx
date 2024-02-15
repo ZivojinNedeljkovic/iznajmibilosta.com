@@ -1,5 +1,10 @@
-import Image from 'next/image'
+import TestClient from '@lib/trpc/test-client'
 
 export default function Home() {
-  return <main>Home</main>
+  return (
+    <main>
+      Home
+      <TestClient />
+    </main>
+  )
 }

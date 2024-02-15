@@ -18,6 +18,8 @@
       }
     ],
     "paths": {
+      "@firebase/*": ["./src/lib/firebase/*"],
+      "@lib/*": ["./src/lib/*"],
       "@ui/*": ["./src/features/ui/*"],
       "@navigation/*": ["./src/features/navigation/*"],
       "@auth/*": ["./src/features/auth/*"],
