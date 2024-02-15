@@ -10,7 +10,6 @@ import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
 import ActionButton from '@ui/button/action-button'
 import getPasswordConditions from './getPasswordConditions'
-// import createUserWithEmailAndPassword from '@/lib/firebase/createUserWithEmailAndPassword'
 
 function SignUpForm() {
   const {
