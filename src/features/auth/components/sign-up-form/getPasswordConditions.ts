@@ -1,8 +1,8 @@
 import {
+  passwordLengthSchema,
   containsANumberSchema,
   containsASpecialCharSchema,
-  passwordLengthSchema,
-} from './form-schema'
+} from '@auth/schemas/password-schema'
 
 function getPasswordConditions(password: string) {
   return [
