@@ -8,8 +8,11 @@ import { formSchema } from './form-schema'
 import Conditions from '@ui/conditions'
 import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
-import ActionButton from '@ui/button/action-button'
+import ActionButton from '@ui/buttons/action-button'
 import getPasswordConditions from './getPasswordConditions'
+import { useEmailContext } from '@auth/context/email-context'
+import { useRouter } from 'next/navigation'
+import AppPage from '@navigation/config/app-pages'
 
 function SignUpForm() {
   const {
@@ -23,23 +26,34 @@ function SignUpForm() {
     resolver: zodResolver(formSchema),
   })
 
+  const router = useRouter()
+
+  const { setEmail } = useEmailContext()
+
   const password = watch('password')
 
   const passwordConditions = getPasswordConditions(password)
 
   const hasError = Object.entries(errors).length > 0
 
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    const createUserWithEmailAndPassword = (
+      await import('@/lib/firebase/createUserWithEmailAndPassword')
+    ).default
+
+    try {
+      await createUserWithEmailAndPassword(email, password)
+    } catch (error) {
+      alert(error)
+      return
+    }
+
+    setEmail(email)
+    router.push(AppPage.verifyEmail)
+  })
+
   return (
-    <form
-      onSubmit={handleSubmit(async ({ email, password }) => {
-        const createUserWithEmailAndPassword = (
-          await import('@/lib/firebase/createUserWithEmailAndPassword')
-        ).default
-        createUserWithEmailAndPassword(email, password)
-      })}
-      noValidate
-      className={styles.form}
-    >
+    <form onSubmit={onSubmit} noValidate className={styles.form}>
       <FlexBox direction="column" gap={16}>
         <TextFiled
           label="E-mail adresa"
