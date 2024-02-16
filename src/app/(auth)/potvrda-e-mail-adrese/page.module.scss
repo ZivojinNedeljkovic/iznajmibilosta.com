@@ -1,6 +1,5 @@
 .wrapper p {
   text-align: left;
-  margin-bottom: 0;
   font-size: 1rem;
 }
 
@@ -11,6 +10,7 @@
 }
 
 .wrapper button {
-  padding: 0 0.4em;
-  transform: translateX(-0.4em);
+  $padding: 0.4em;
+  padding: 0 $padding;
+  transform: translateX(-$padding);
 }

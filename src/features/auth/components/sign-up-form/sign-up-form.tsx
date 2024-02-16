@@ -26,11 +26,8 @@ function SignUpForm() {
   })
 
   const router = useRouter()
-
   const password = watch('password')
-
   const passwordConditions = getPasswordConditions(password)
-
   const hasError = Object.entries(errors).length > 0
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
