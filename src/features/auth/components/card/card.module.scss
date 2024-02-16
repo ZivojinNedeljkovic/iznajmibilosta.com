@@ -2,3 +2,13 @@
   max-width: 312px;
   margin: 0 auto;
 }
+
+.card h1 {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.card > p {
+  margin: 28px 0 24px 0;
+  text-align: center;
+}

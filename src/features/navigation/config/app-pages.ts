@@ -1,5 +1,5 @@
 class AppPageClass {
-  signInPage = '/sign-in'
+  signInPage = '/login'
   signUpPage = '/registracija'
   termsAndConditionsPage = '/#'
 }
