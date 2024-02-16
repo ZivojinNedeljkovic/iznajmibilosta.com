@@ -10,7 +10,6 @@ import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
 import ActionButton from '@ui/buttons/action-button'
 import getPasswordConditions from './getPasswordConditions'
-import { useEmailContext } from '@auth/context/email-context'
 import { useRouter } from 'next/navigation'
 import AppPage from '@navigation/config/app-pages'
 
@@ -27,8 +26,6 @@ function SignUpForm() {
   })
 
   const router = useRouter()
-
-  const { setEmail } = useEmailContext()
 
   const password = watch('password')
 
@@ -48,7 +45,7 @@ function SignUpForm() {
       return
     }
 
-    setEmail(email)
+    sessionStorage.setItem('email', email)
     router.push(AppPage.verifyEmail)
   })
 
