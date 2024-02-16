@@ -1,6 +1,7 @@
 .wrapper {
   margin: 24px auto;
   position: relative;
+  z-index: 2;
 }
 .wrapper::before {
   content: '';
