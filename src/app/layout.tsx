@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { v4 as uuidv4 } from 'uuid'
 import '../styles/globals.scss'
+import { cookies } from 'next/headers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,6 +19,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const csrfToken = uuidv4()
+  cookies().set('csrfToken', csrfToken)
   return (
     <html lang="en">
       <body className={inter.variable}>{children}</body>
