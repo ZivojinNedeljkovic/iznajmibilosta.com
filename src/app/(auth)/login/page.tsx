@@ -12,14 +12,14 @@ function page() {
   return (
     <main>
       <Card>
-        <H1>Registrujte se</H1>
+        <Card.H1>Registrujte se</Card.H1>
         <SignInForm />
         <OrDivide />
         <Providers />
-        <P>
+        <Card.P>
           Nemate nalog?{' '}
           <AppLink href={AppPage.signUpPage}>Registrujte se</AppLink>
-        </P>
+        </Card.P>
       </Card>
     </main>
   )
