@@ -9,6 +9,7 @@ import { Controller, useForm } from 'react-hook-form'
 import ActionButton from '@ui/buttons/action-button'
 import styles from './sign-in-form.module.scss'
 import signInWithEmailAndPassword from '@firebase/sign-in-with-email-and-password'
+import CsrfToken from '@auth/models/csrf-token'
 
 function SignInForm() {
   const {
@@ -24,6 +25,8 @@ function SignInForm() {
   const onSubmit = handleSubmit(({ email, password }) => {
     signInWithEmailAndPassword(email, password)
   })
+
+  console.log(CsrfToken.value)
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

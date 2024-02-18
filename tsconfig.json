@@ -18,6 +18,7 @@
       }
     ],
     "paths": {
+      "@layout/*": ["./src/features/layout/*"],
       "@firebase/*": ["./src/lib/firebase/*"],
       "@lib/*": ["./src/lib/*"],
       "@ui/*": ["./src/features/ui/*"],
