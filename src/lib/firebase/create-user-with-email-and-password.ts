@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword as _createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  createUserWithEmailAndPassword as _createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth'
 import { auth } from './firebase'
 
 async function createUserWithEmailAndPassword(email: string, password: string) {
@@ -7,7 +10,8 @@ async function createUserWithEmailAndPassword(email: string, password: string) {
     email,
     password
   )
-  await auth.signOut()
+  await sendEmailVerification(firebaseResult.user)
+  auth.signOut()
   return firebaseResult
 }
 

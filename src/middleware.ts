@@ -16,11 +16,11 @@ export const config = {
 }
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next()
-
   const csrfToken = uuidv4()
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000 // 5d
+
+  const response = NextResponse.next()
 
   response.cookies.set({
     name: 'csrfToken',
@@ -29,6 +29,8 @@ export function middleware(request: NextRequest) {
     secure: true,
     maxAge: expiresIn,
   })
+
+  response.headers.append('csrfToken', csrfToken)
 
   return response
 }
