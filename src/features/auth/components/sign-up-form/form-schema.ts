@@ -1,13 +1,11 @@
 import EMPTY_FIELD_ERROR_MESSAGE from '@auth/constants/empty-field-error-message'
+import emailSchema from '@auth/schemas/email-schema'
 import { passwordSchema } from '@auth/schemas/password-schema'
 import { z } from 'zod'
 
 export const formSchema = z
   .object({
-    email: z
-      .string()
-      .min(1, EMPTY_FIELD_ERROR_MESSAGE)
-      .email('Nije valiadn e-mail adresa'),
+    email: emailSchema,
     password: passwordSchema,
     confirmPassword: z.string().min(1, EMPTY_FIELD_ERROR_MESSAGE),
   })
