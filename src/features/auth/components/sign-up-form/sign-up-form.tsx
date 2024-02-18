@@ -9,7 +9,7 @@ import Conditions from '@ui/conditions'
 import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
 import ActionButton from '@ui/buttons/action-button'
-import getPasswordConditions from './getPasswordConditions'
+import getPasswordConditions from './get-password-conditions'
 import { useRouter } from 'next/navigation'
 import AppPage from '@navigation/config/app-pages'
 
@@ -32,7 +32,7 @@ function SignUpForm() {
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     const createUserWithEmailAndPassword = (
-      await import('@/lib/firebase/createUserWithEmailAndPassword')
+      await import('@/lib/firebase/create-user-with-email-and-password')
     ).default
 
     try {
