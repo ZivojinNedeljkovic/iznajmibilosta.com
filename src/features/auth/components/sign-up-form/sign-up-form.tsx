@@ -1,18 +1,17 @@
 'use client'
-import FlexBox from '@ui/flex-box'
 import React from 'react'
+import styles from './sign-up-form.module.scss'
+import FlexBox from '@ui/flex-box'
 import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  containsASpecialCharSchema,
-  containsANumberSchema,
-  formSchema,
-  passwordLengthSchema,
-} from './form-schema'
+import { formSchema } from './form-schema'
 import Conditions from '@ui/conditions'
 import TextFiled from '@ui/field/text-filed'
 import PasswordField from '@ui/field/password-field'
+import ActionButton from '@ui/buttons/action-button'
+import getPasswordConditions from './get-password-conditions'
+import { useRouter } from 'next/navigation'
+import AppPage from '@navigation/config/app-pages'
 
 function SignUpForm() {
   const {
@@ -26,27 +25,29 @@ function SignUpForm() {
     resolver: zodResolver(formSchema),
   })
 
+  const router = useRouter()
   const password = watch('password')
-
-  const passwordConditions = [
-    {
-      description: 'Između 8 i 20 karaktera',
-      isTrue: passwordLengthSchema.safeParse(password).success,
-    },
-    {
-      description: 'Najmanje jedan broj',
-      isTrue: containsANumberSchema.safeParse(password).success,
-    },
-    {
-      description: 'Najmanje jedan simbol',
-      isTrue: containsASpecialCharSchema.safeParse(password).success,
-    },
-  ]
-
+  const passwordConditions = getPasswordConditions(password)
   const hasError = Object.entries(errors).length > 0
 
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    const createUserWithEmailAndPassword = (
+      await import('@/lib/firebase/create-user-with-email-and-password')
+    ).default
+
+    try {
+      await createUserWithEmailAndPassword(email, password)
+    } catch (error) {
+      alert(error)
+      return
+    }
+
+    sessionStorage.setItem('email', email)
+    router.push(AppPage.verifyEmail)
+  })
+
   return (
-    <form onSubmit={handleSubmit(() => {})} noValidate>
+    <form onSubmit={onSubmit} noValidate className={styles.form}>
       <FlexBox direction="column" gap={16}>
         <TextFiled
           label="E-mail adresa"
@@ -78,7 +79,7 @@ function SignUpForm() {
           control={control}
         />
       </FlexBox>
-      <button>submit</button>
+      <ActionButton type="submit">Nastavi</ActionButton>
     </form>
   )
 }

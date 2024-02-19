@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './conditions.module.scss'
-import ConditionIcon from './condition-icon'
+import ConditionIcon from '../icons/condition-icon'
 import classNames from 'classnames'
-import ErrorIcon from './error-icon'
+import ErrorIcon from '../icons/error-icon'
 
 type Props = {
   conditions: {

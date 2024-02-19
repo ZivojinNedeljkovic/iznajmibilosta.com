@@ -1,4 +1,17 @@
 .card {
-  max-width: 312px;
+  max-width: 25rem;
   margin: 0 auto;
+  background-color: var(--white);
+  padding: 32px;
+  border-radius: var(--border-radius);
+}
+
+.h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.p {
+  margin: 28px 0 0 0;
+  text-align: center;
 }
