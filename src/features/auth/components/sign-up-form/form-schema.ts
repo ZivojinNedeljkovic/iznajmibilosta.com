@@ -8,6 +8,12 @@ export const formSchema = z
     email: emailSchema,
     password: passwordSchema,
     confirmPassword: z.string().min(1, EMPTY_FIELD_ERROR_MESSAGE),
+    acceptsTermsAndConditions: z.boolean().refine(val => val, {
+      message: 'Morate prihvatiti pravila i uslove korišcenja',
+    }),
+    isOlderThe16: z.boolean().refine(val => val, {
+      message: 'Morate imati više od 16 godina',
+    }),
   })
   .refine(({ password, confirmPassword }) => password === confirmPassword, {
     message: 'Uneta lozinka se ne poklapa',

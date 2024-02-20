@@ -12,6 +12,7 @@ import ActionButton from '@ui/buttons/action-button'
 import getPasswordConditions from './get-password-conditions'
 import { useRouter } from 'next/navigation'
 import AppPage from '@navigation/config/app-pages'
+import Checkbox from '@ui/checkbox'
 
 function SignUpForm() {
   const {
@@ -21,7 +22,13 @@ function SignUpForm() {
     formState: { errors },
     handleSubmit,
   } = useForm({
-    defaultValues: { email: '', password: '', confirmPassword: '' },
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      acceptsTermsAndConditions: false,
+      isOlderThe16: false,
+    },
     resolver: zodResolver(formSchema),
   })
 
@@ -78,6 +85,18 @@ function SignUpForm() {
           )}
           control={control}
         />
+        <Checkbox
+          inputProps={register('acceptsTermsAndConditions')}
+          errorMessage={errors.acceptsTermsAndConditions?.message}
+        >
+          Prihvatam Pravila i uslove koriscenja
+        </Checkbox>
+        <Checkbox
+          inputProps={register('isOlderThe16')}
+          errorMessage={errors.isOlderThe16?.message}
+        >
+          Imam više od 16 godina
+        </Checkbox>
       </FlexBox>
       <ActionButton type="submit">Nastavi</ActionButton>
     </form>
