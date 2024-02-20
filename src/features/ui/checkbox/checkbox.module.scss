@@ -1,0 +1,55 @@
+.container {
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: fit-content;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checked-icon,
+.unchecked-icon {
+  width: 1.5rem;
+  fill: var(--text-color);
+}
+
+.error .checked-icon,
+.error .unchecked-icon {
+  width: 1.5rem;
+  fill: var(--error);
+}
+
+.container input ~ .checked-icon {
+  display: none;
+}
+
+.container input:checked ~ .checked-icon {
+  display: block;
+}
+
+.container input ~ .unchecked-icon {
+  display: block;
+}
+
+.container input:checked ~ .unchecked-icon {
+  display: none;
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 1rem;
+  margin-top: 4px;
+}
