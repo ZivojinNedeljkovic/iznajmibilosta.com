@@ -20,6 +20,7 @@ function SignUpForm() {
     control,
     watch,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -44,8 +45,12 @@ function SignUpForm() {
 
     try {
       await createUserWithEmailAndPassword(email, password)
-    } catch (error) {
-      alert(error)
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        setError('email', { message: 'Nalog sa e-mail adresom već postoji' })
+        return
+      }
+      alert(error.code)
       return
     }
 
