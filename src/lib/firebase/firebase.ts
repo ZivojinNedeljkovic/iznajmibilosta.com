@@ -18,8 +18,8 @@ export const firebaseConfig = {
 export const firebaseApp =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
 export const auth = getAuth(firebaseApp)
+auth.languageCode = 'sr'
 
 setPersistence(auth, inMemoryPersistence)
 
-// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 connectAuthEmulator(auth, 'http://127.0.0.1:9099')
