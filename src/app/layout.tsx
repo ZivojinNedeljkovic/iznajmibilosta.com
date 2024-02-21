@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.scss'
-import { cookies, headers } from 'next/headers'
+import { headers } from 'next/headers'
 import CsrfTokenProvider from '@auth/components/CsrfTokenProvider'
 import Header from '@layout/components/header/header'
 
