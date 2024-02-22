@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.scss'
-import { headers } from 'next/headers'
 import CsrfTokenProvider from '@auth/components/CsrfTokenProvider'
 import Header from '@layout/components/header/header'
+import StoreProvider from '@layout/components/StoreProvider'
+import getCsrfTokenFromHeaders from '@auth/helpers/get-csrf-token-from-headers'
+import getUserDataFromSession from '@auth/helpers/get-user-data-from-session'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,14 +22,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const csrfToken = headers().get('csrfToken')
-  if (!csrfToken) throw new Error('csrfToken cookie is not set')
-
+  const csrfToken = getCsrfTokenFromHeaders()
+  let user = await getUserDataFromSession()
+  console.log('**********in root layout')
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Header />
-        <CsrfTokenProvider csrfToken={csrfToken}>{children}</CsrfTokenProvider>
+        <CsrfTokenProvider csrfToken={csrfToken}>
+          <StoreProvider user={user}>
+            <Header />
+            {children}
+          </StoreProvider>
+        </CsrfTokenProvider>
       </body>
     </html>
   )
