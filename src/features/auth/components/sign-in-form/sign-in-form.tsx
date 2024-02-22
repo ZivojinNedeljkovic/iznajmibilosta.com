@@ -8,8 +8,6 @@ import PasswordField from '@ui/field/password-field'
 import { Controller, useForm } from 'react-hook-form'
 import ActionButton from '@ui/buttons/action-button'
 import styles from './sign-in-form.module.scss'
-import signInWithEmailAndPassword from '@firebase/sign-in-with-email-and-password'
-import CsrfToken from '@auth/models/csrf-token'
 
 function SignInForm() {
   const {
@@ -22,11 +20,14 @@ function SignInForm() {
     resolver: zodResolver(formSchema),
   })
 
-  const onSubmit = handleSubmit(({ email, password }) => {
-    signInWithEmailAndPassword(email, password)
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    const signIn = (
+      await import('@lib/firebase/sign-in-with-email-and-password')
+    ).default
+    try {
+      signIn(email, password)
+    } catch (error) {}
   })
-
-  console.log(CsrfToken.value)
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

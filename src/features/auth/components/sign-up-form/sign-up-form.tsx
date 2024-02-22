@@ -39,12 +39,12 @@ function SignUpForm() {
   const hasError = Object.entries(errors).length > 0
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
-    const createUserWithEmailAndPassword = (
+    const signUp = (
       await import('@/lib/firebase/create-user-with-email-and-password')
     ).default
 
     try {
-      await createUserWithEmailAndPassword(email, password)
+      await signUp(email, password)
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         setError('email', { message: 'Nalog sa e-mail adresom već postoji' })
@@ -55,7 +55,7 @@ function SignUpForm() {
     }
 
     sessionStorage.setItem('email', email)
-    router.push(AppPage.verifyEmail)
+    router.push(AppPage.verificationEmailSendPage)
   })
 
   return (
