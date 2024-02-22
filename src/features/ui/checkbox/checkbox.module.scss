@@ -6,13 +6,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
   width: fit-content;
 }
 
-.container input {
+.input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -32,19 +29,32 @@
   fill: var(--error);
 }
 
-.container input ~ .checked-icon {
+.input ~ div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: fit-content;
+  border-radius: var(--border-radius);
+}
+
+.input:focus-visible ~ div {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+.input ~ div .checked-icon {
   display: none;
 }
 
-.container input:checked ~ .checked-icon {
+.input:checked ~ div .checked-icon {
   display: block;
 }
 
-.container input ~ .unchecked-icon {
+.input ~ div .unchecked-icon {
   display: block;
 }
 
-.container input:checked ~ .unchecked-icon {
+.input:checked ~ div .unchecked-icon {
   display: none;
 }
 

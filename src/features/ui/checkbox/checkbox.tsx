@@ -22,11 +22,19 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(function Checkbox(
         className={classNames(styles.container, className, {
           [styles.error]: isError,
         })}
+        tabIndex={2}
       >
-        <input ref={ref} {...inputProps} type="checkbox" />
-        <CheckedIcon className={styles['checked-icon']} />
-        <UncheckedIcon className={styles['unchecked-icon']} />
-        <span className={styles.label}>{children}</span>
+        <input
+          ref={ref}
+          type="checkbox"
+          className={styles.input}
+          {...inputProps}
+        />
+        <div>
+          <CheckedIcon className={styles['checked-icon']} />
+          <UncheckedIcon className={styles['unchecked-icon']} />
+          <span className={styles.label}>{children}</span>
+        </div>
       </label>
       {errorMessage && (
         <p className={styles['error-message']}>{errorMessage}</p>
