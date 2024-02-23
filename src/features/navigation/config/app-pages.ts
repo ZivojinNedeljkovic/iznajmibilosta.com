@@ -2,7 +2,8 @@ class AppPageClass {
   signInPage = '/login'
   signUpPage = '/registracija'
   termsAndConditionsPage = '/#'
-  verifyEmail = '/potvrda-e-mail-adrese'
+  verificationEmailSendPage = '/potvrda-e-mail-adrese'
+  homePage = '/'
 }
 
 const AppPage = new AppPageClass()
