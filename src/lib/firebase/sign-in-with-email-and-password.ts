@@ -10,7 +10,15 @@ async function signInWithEmailAndPassword(email: string, password: string) {
     password
   )
   const idToken = await userCredential.user.getIdToken()
-  const { csrfToken } = await trpc.auth.signIn.mutate({ idToken })
+
+  let csrfToken = ''
+
+  try {
+    const res = await trpc.auth.signIn.mutate({ idToken })
+    csrfToken = res.csrfToken
+  } catch (error) {
+    throw new Error('Failed to sign in user')
+  }
 
   const { uid, emailVerified, displayName, phoneNumber, photoURL } =
     userCredential.user

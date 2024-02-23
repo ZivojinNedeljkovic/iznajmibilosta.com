@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import initFirebaseAdmin from '@firebase/init-firebase-admin'
 import { v4 as uuidv4 } from 'uuid'
 import { getAuth } from 'firebase-admin/auth'
+import { TRPCError } from '@trpc/server'
 
 const authRouter = router({
   signIn: procedure
@@ -16,10 +17,17 @@ const authRouter = router({
       initFirebaseAdmin()
       const sessionMaxAge = 60 * 60 * 24 * 1000 * 14 // 14d
       const firebaseAuth = getAuth()
-      
-      const sessionCookie = await firebaseAuth.createSessionCookie(idToken, {
-        expiresIn: sessionMaxAge,
-      })
+      let sessionCookie = ''
+      try {
+        sessionCookie = await firebaseAuth.createSessionCookie(idToken, {
+          expiresIn: sessionMaxAge,
+        })
+      } catch (error) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          cause: process.env.ENVIRONMENT === 'development' ? error : undefined,
+        })
+      }
 
       const csrfToken = uuidv4()
       const cookieList = cookies()

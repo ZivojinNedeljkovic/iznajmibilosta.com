@@ -13,6 +13,7 @@ import { setUser } from '@auth/store/user-slice'
 import { useRouter } from 'next/navigation'
 import AppPage from '@navigation/config/app-pages'
 import { setCsrfToken } from '@features/security/store/security-slice'
+import P from '@ui/p'
 
 function SignInForm() {
   const {
@@ -20,6 +21,7 @@ function SignInForm() {
     control,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm({
     defaultValues: { email: '', password: '' },
     resolver: zodResolver(formSchema),
@@ -38,11 +40,28 @@ function SignInForm() {
       dispatch(setUser(user))
       dispatch(setCsrfToken(csrfToken))
       router.replace(AppPage.homePage)
-    } catch (error) {}
+    } catch (error: any) {
+      console.log('error code: ', error.code)
+      switch (error.code) {
+        case 'auth/user-not-found':
+          setError('email', {
+            message: 'Ne postoji nalog sa datom e-mail adresom',
+          })
+          break
+        case 'auth/wrong-password':
+          setError('password', { message: 'Pogrešna lozinka' })
+          break
+        default:
+          setError('root', { message: error?.message ?? '' })
+          break
+      }
+    }
   })
 
+  const rootError = errors.root && 'Došlo je do greške!'
+
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form noValidate className={styles.form} onSubmit={onSubmit}>
       <FlexBox direction="column" gap={16}>
         <TextFiled
           label="E-mail adresa"
@@ -61,6 +80,7 @@ function SignInForm() {
           )}
           control={control}
         />
+        {rootError && <P>{rootError}</P>}
       </FlexBox>
       <ActionButton type="submit">Nastavi</ActionButton>
     </form>
