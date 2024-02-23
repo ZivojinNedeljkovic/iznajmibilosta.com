@@ -22,7 +22,6 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(function Checkbox(
         className={classNames(styles.container, className, {
           [styles.error]: isError,
         })}
-        tabIndex={2}
       >
         <input
           ref={ref}
