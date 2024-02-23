@@ -8,7 +8,7 @@ function VerifyEmailPage() {
   return (
     <main className={styles.wrapper}>
       <Card>
-        <Card.H1>Skoro pa gotovo!</Card.H1>
+        <Card.H1>Aktivirajte Vaš nalog</Card.H1>
         <Card.P>
           Poslali smo Vam aktivacioni e-mail na: <SessionEmailLink />
         </Card.P>

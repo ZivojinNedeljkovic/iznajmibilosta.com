@@ -4,7 +4,6 @@ import '../styles/globals.scss'
 import CsrfTokenProvider from '@auth/components/CsrfTokenProvider'
 import Header from '@layout/components/header/header'
 import StoreProvider from '@layout/components/StoreProvider'
-import getCsrfTokenFromHeaders from '@auth/helpers/get-csrf-token-from-headers'
 import getUserDataFromSession from '@auth/helpers/get-user-data-from-session'
 
 const inter = Inter({
@@ -22,18 +21,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const csrfToken = getCsrfTokenFromHeaders()
   let user = await getUserDataFromSession()
   console.log('**********in root layout')
+
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <CsrfTokenProvider csrfToken={csrfToken}>
-          <StoreProvider user={user}>
-            <Header />
-            {children}
-          </StoreProvider>
-        </CsrfTokenProvider>
+        <StoreProvider user={user}>
+          <Header />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   )

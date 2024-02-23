@@ -23,7 +23,8 @@ const authRouter = router({
         })
       }
 
-      const expiresIn = 60 * 60 * 24 * 1000 * 14 //5d
+      // const expiresIn = 1000 * 60 * 5
+      const expiresIn = 60 * 60 * 24 * 1000 * 14 // 14d
       const firebaseAuth = await auth()
       const sessionCookie = await firebaseAuth.createSessionCookie(idToken, {
         expiresIn,

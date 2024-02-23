@@ -8,6 +8,7 @@ async function getUserDataFromSession() {
 
   const session = cookies().get('session')?.value
   if (session) {
+    console.log('********** Getting user data')
     initFirebaseAdmin()
     const auth = getAuth()
     try {

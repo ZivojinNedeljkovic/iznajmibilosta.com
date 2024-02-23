@@ -1,24 +1,14 @@
+'use client'
 import React from 'react'
 import HeaderMobile from '../header-mobile/header-mobile'
-import { getAuth } from 'firebase-admin/auth'
-import { cookies } from 'next/headers'
-import initFirebaseAdmin from '@firebase/init-firebase-admin'
+import { useAppSelector } from '@lib/redux/hooks'
 
-async function Header() {
-  const session = cookies().get('session')?.value
-
-  if (!session) return
-  initFirebaseAdmin()
-
-  const auth = getAuth()
-  const idToken = await auth.verifySessionCookie(session, true)
-
-  const user = await auth.getUser(idToken.uid)
-
+function Header() {
+  const email = useAppSelector(state => state.user.email)
   return (
     <>
       <HeaderMobile />
-      {/* <p>{user.email}</p> */}
+      <p>{email}</p>
     </>
   )
 }
