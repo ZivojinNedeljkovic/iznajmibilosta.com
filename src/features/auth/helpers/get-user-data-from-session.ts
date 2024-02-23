@@ -1,14 +1,13 @@
-import User from '@auth/types/user'
+import UserData from '@auth/types/user'
 import initFirebaseAdmin from '@firebase/init-firebase-admin'
 import { getAuth } from 'firebase-admin/auth'
 import { cookies } from 'next/headers'
 
 async function getUserDataFromSession() {
-  let user: User | null = null
+  let user: UserData | null = null
 
   const session = cookies().get('session')?.value
   if (session) {
-    console.log('********** Getting user data')
     initFirebaseAdmin()
     const auth = getAuth()
     try {
@@ -17,11 +16,11 @@ async function getUserDataFromSession() {
 
       user = {
         uid: userRecord.uid,
-        email: userRecord.email,
+        email: userRecord.email ?? null,
         emailVerified: userRecord.emailVerified,
-        phoneNumber: userRecord.phoneNumber,
-        photoURL: userRecord.photoURL,
-        displayName: userRecord.displayName,
+        phoneNumber: userRecord.phoneNumber ?? null,
+        photoURL: userRecord.photoURL ?? null,
+        displayName: userRecord.displayName ?? null,
       }
     } catch (error: any) {
       console.log('error: ', error)

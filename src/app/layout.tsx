@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.scss'
-import CsrfTokenProvider from '@auth/components/CsrfTokenProvider'
 import Header from '@layout/components/header/header'
 import StoreProvider from '@layout/components/StoreProvider'
 import getUserDataFromSession from '@auth/helpers/get-user-data-from-session'
+import { cookies } from 'next/headers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,13 +21,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  let user = await getUserDataFromSession()
-  console.log('**********in root layout')
-
+  const user = await getUserDataFromSession()
+  const csrfToken = cookies().get('csrfToken')?.value
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <StoreProvider user={user}>
+        <StoreProvider user={user} csrfToken={csrfToken}>
           <Header />
           {children}
         </StoreProvider>

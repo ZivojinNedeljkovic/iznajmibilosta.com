@@ -1,20 +1,26 @@
-import User from '@auth/types/user'
+import UserData from '@auth/types/user'
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: User = {
+const initialState: UserData = {
   uid: '',
   emailVerified: false,
+  displayName: null,
+  email: null,
+  phoneNumber: null,
+  photoURL: null
 }
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    setUser(state, { payload }: PayloadAction<User>) {
+    setUser(state, { payload }: PayloadAction<UserData>) {
       return payload
     },
   },
 })
 
 export const { setUser } = userSlice.actions
+
+export const userReducer = userSlice.reducer

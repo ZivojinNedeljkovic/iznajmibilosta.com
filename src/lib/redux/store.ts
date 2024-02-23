@@ -1,10 +1,12 @@
-import { userSlice } from '@auth/store/user-slice'
+import { userReducer } from '@auth/store/user-slice'
+import { securityReducer } from '@features/security/store/security-slice'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      user: userSlice.reducer,
+      user: userReducer,
+      security: securityReducer,
     },
   })
 }

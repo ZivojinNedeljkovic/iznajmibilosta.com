@@ -8,6 +8,11 @@ import PasswordField from '@ui/field/password-field'
 import { Controller, useForm } from 'react-hook-form'
 import ActionButton from '@ui/buttons/action-button'
 import styles from './sign-in-form.module.scss'
+import { useAppDispatch } from '@lib/redux/hooks'
+import { setUser } from '@auth/store/user-slice'
+import { useRouter } from 'next/navigation'
+import AppPage from '@navigation/config/app-pages'
+import { setCsrfToken } from '@features/security/store/security-slice'
 
 function SignInForm() {
   const {
@@ -20,12 +25,19 @@ function SignInForm() {
     resolver: zodResolver(formSchema),
   })
 
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+
   const onSubmit = handleSubmit(async ({ email, password }) => {
     const signIn = (
       await import('@lib/firebase/sign-in-with-email-and-password')
     ).default
+
     try {
-      signIn(email, password)
+      const { user, csrfToken } = await signIn(email, password)
+      dispatch(setUser(user))
+      dispatch(setCsrfToken(csrfToken))
+      router.replace(AppPage.homePage)
     } catch (error) {}
   })
 

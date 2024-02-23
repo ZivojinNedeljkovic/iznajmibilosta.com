@@ -1,8 +1,8 @@
-import type { UserRecord } from 'firebase-admin/auth'
+import type { User } from 'firebase/auth'
 
-type User = Pick<
-  UserRecord,
+type UserData = Pick<
+  User,
   'displayName' | 'email' | 'emailVerified' | 'phoneNumber' | 'photoURL' | 'uid'
 >
 
-export default User
+export default UserData
