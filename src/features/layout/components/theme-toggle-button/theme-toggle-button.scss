@@ -1,0 +1,39 @@
+.theme-toggle-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.theme-toggle-button-light-icon,
+.theme-toggle-button-dark-icon {
+  fill: var(--text-color);
+}
+
+.theme-toggle-button-light-icon {
+  display: block;
+}
+.theme-toggle-button-dark-icon {
+  display: none;
+}
+
+:root.dark-theme {
+  .theme-toggle-button-light-icon {
+    display: none;
+  }
+  .theme-toggle-button-dark-icon {
+    display: block;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) {
+    .light-icon {
+      display: none;
+    }
+    .dark-icon {
+      display: block;
+    }
+  }
+}

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '../styles/globals.scss'
 import Header from '@layout/components/header/header'
 import StoreProvider from '@layout/components/StoreProvider'
 import getUserDataFromSession from '@auth/helpers/get-user-data-from-session'
 import { cookies } from 'next/headers'
+import type Theme from '@layout/types/Theme'
+import Html from '@layout/components/html'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,15 +23,18 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const user = await getUserDataFromSession()
-  const csrfToken = cookies().get('csrfToken')?.value
+  const cookieList = cookies()
+  const csrfToken = cookieList.get('csrfToken')?.value
+  const theme = cookieList.get('theme')?.value as Theme | undefined
+
   return (
-    <html lang="en">
-      <body className={inter.variable}>
-        <StoreProvider user={user} csrfToken={csrfToken}>
+    <StoreProvider user={user} csrfToken={csrfToken} theme={theme}>
+      <Html>
+        <body className={inter.variable}>
           <Header />
           {children}
-        </StoreProvider>
-      </body>
-    </html>
+        </body>
+      </Html>
+    </StoreProvider>
   )
 }
