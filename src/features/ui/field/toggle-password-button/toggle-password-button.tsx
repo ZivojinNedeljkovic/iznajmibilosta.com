@@ -1,8 +1,8 @@
 import React from 'react'
-import ShowPasswordIcon from '../../icons/show-password-icon'
+import ShowPasswordIcon from '../../icons/show-password-icon/show-password-icon'
 import styles from './toggle-password-button.module.scss'
 import classNames from 'classnames'
-import HidePasswordIcon from '../../icons/hide-password-icon'
+import HidePasswordIcon from '../../icons/hide-password-icon/hide-password-icon'
 
 type Props = {
   className?: string
