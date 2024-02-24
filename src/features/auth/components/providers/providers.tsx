@@ -1,12 +1,9 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './providers.module.scss'
 import GoogleIcon from './google-icon'
 import FacebookIcon from './facebook-icon'
 import AppleIcon from './apple-icon'
-import googleSignInWithRedirect from '@firebase/google-sign-in-with-redirect'
-import { getRedirectResult } from 'firebase/auth'
-import { auth } from '@firebase/firebase'
 import googleSignInWithPopup from '@firebase/google-sign-in-with-popup'
 
 type Props = {
