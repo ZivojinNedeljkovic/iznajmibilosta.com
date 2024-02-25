@@ -35,7 +35,7 @@ body {
   color: var(--text-color);
 }
 
-:root.dark-theme {
+@mixin dark-theme-variables {
   --box-shadow: 0px 2px 4px 0px rgba(251, 251, 251, 0.2);
   --border: 1px solid #747775;
   --text-color: #d8d8d8;
@@ -47,17 +47,17 @@ body {
   --background: #f3f5f6;
 }
 
+:root.dark-theme {
+  @include dark-theme-variables();
+}
+
+.dark-theme {
+  color-scheme: dark;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not(.light-theme) {
-    --box-shadow: 0px 2px 4px 0px rgba(251, 251, 251, 0.2);
-    --border: 1px solid #747775;
-    --text-color: #d8d8d8;
-    --border-color: #747775;
-    --blue-500: #4285f4;
-    --white: rgb(9, 9, 9);
-    --action: #818183;
-    --action-hover: #6b6e72;
-    --background: #f3f5f6;
+    @include dark-theme-variables();
   }
   html {
     color-scheme: dark;
