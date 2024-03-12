@@ -10,8 +10,6 @@ function Header() {
   return (
     <>
       <HeaderMobile />
-      <ThemeToggleButton />
-      <p>{email}</p>
     </>
   )
 }
